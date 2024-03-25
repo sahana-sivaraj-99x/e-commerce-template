@@ -19,12 +19,15 @@ spec:
     - title: Provide information about the new component
       required:
         - orgName
+        - repoName
         - owner
-        - system
         - databaseUrl
       properties:
         orgName:
           title: Organization Name
+          type: string
+        repoName:
+          title: Repository Name
           type: string
         description:
           title: Description
@@ -42,14 +45,6 @@ spec:
               kind:
                 - Group
                 - User
-        system:
-          title: System
-          type: string
-          ui:field: EntityPicker
-          ui:options:
-            catalogFilter:
-              kind:
-                - System
         CloudPlatformToDeploy:
           title: Cloud Platform
           type: string
