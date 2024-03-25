@@ -58,6 +58,10 @@ spec:
             - Azure
             - AWS
             - GCP 
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
         repoUrl:
           title: Repository Location
           type: string
