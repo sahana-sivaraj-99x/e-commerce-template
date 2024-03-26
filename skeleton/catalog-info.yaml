@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.orgName | dump }}
+  {%- if values.description %}
+  description: ${{values.description | dump}}
+  {%- endif %}
+  annotations:
+    # github.com/project-slug: sagar0419/aws-ec2
+    backstage.io/techdocs-ref: dir:.
+
+spec:
+  type: website
+  owner: ${{ values.owner | dump }}
+  lifecycle: experimental

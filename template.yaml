@@ -79,6 +79,7 @@ spec:
           system: ${{ parameters.system }}
           applicationType: api
           description: ${{ parameters.description }}
+          databaseUrl: ${{parameters.databaseUrl}}
           sourceControl: github.com
 
     - id: publish
