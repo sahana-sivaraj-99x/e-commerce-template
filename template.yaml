@@ -22,6 +22,10 @@ spec:
         - repoName
         - owner
         - databaseUrl
+        - awsAccessKey
+        - awsSecretKey
+        - awsRegion
+        - s3bucketname
       properties:
         orgName:
           title: Organization Name
@@ -45,6 +49,27 @@ spec:
               kind:
                 - Group
                 - User
+        awsAccessKey:
+          title: AWS account Access Key
+          type: string
+          description: The Access key for your AWS account
+          ui:widget: password
+        awsSecretKey:
+          title: AWS account secret
+          type: string
+          description: The secret value for your AWS account
+          ui:widget: password
+        s3bucketname:
+          title: AWS S3 bucket name
+          type: string
+          description: The S3 bucket name for your AWS account
+        awsRegion:
+          title: AWS Region
+          type: string
+          description: The region to deploy to in your AWS account
+          enum:
+            - ap-southeast-1
+            - ap-south-1      
         CloudPlatformToDeploy:
           title: Cloud Platform
           type: string
@@ -72,6 +97,9 @@ spec:
       action: fetch:template
       input:
         url: ./skeleton
+        copyWithoutTemplating:
+          - "**/.github/**"
+          - "./**/.github/**"
         values:
           orgName: ${{ parameters.orgName }}
           repoName: ${{ parameters.repoName }}
@@ -90,6 +118,19 @@ spec:
         description: ${{ parameters.description }}
         repoUrl: github.com?owner=${{ parameters.orgName }}&repo=${{ parameters.repoName }}
         defaultBranch: main
+    
+    - id: github-action
+      name: Trigger GitHub Action
+      action: github:actions:dispatch
+      input:
+        workflowId: 'techdocs.yaml' # GitHub Action workflow ID
+        repoUrl: github.com?owner=${{ parameters.orgName }}&repo=${{ parameters.repoName }}
+        branchOrTagName: 'main' # The branch to run this action on
+        workflowInputs:
+          awsAccessKey: ${{ parameters.awsAccessKey }}
+          awsSecretKey: ${{ parameters.awsSecretKey }}
+          awsRegion: ${{ parameters.awsRegion }}
+          bucketName: ${{ parameters.s3bucketname }}
 
     - id: register
       name: Registering the Catalog Info Component
