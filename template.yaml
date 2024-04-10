@@ -116,15 +116,15 @@ spec:
       input:
         allowedHosts: ['github.com']
         description: ${{ parameters.description }}
-        repoUrl: github.com?owner=${{ parameters.orgName }}&repo=${{ parameters.repoName }}
+        repoUrl: ${{parameters.repoUrl}}
         defaultBranch: main
     
     - id: github-action
       name: Trigger GitHub Action
       action: github:actions:dispatch
       input:
-        workflowId: 'techdocs.yaml' # GitHub Action workflow ID
-        repoUrl: github.com?owner=${{ parameters.orgName }}&repo=${{ parameters.repoName }}
+        workflowId: 'techdocs.yml' # GitHub Action workflow ID
+        repoUrl: ${{parameters.repoUrl}}
         branchOrTagName: 'main' # The branch to run this action on
         workflowInputs:
           awsAccessKey: ${{ parameters.awsAccessKey }}
