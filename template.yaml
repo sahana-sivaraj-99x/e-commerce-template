@@ -99,8 +99,8 @@ spec:
         url: ./skeleton
         copyWithoutTemplating:
           - .github/workflows/
-          - "**/.github/**"
-          - "./**/.github/**"
+          # - "**/.github/**"
+          # - "./**/.github/**"
         values:
           orgName: ${{ parameters.orgName }}
           repoName: ${{ parameters.repoName }}
