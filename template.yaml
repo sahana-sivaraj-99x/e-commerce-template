@@ -98,6 +98,7 @@ spec:
       input:
         url: ./skeleton
         copyWithoutTemplating:
+          - .github/workflows/
           - "**/.github/**"
           - "./**/.github/**"
         values:
